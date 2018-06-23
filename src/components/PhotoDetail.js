@@ -3,12 +3,12 @@ import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
-import { Actions } from 'react-native-router-flux';
 
-const AlbumDetail = ({ title, albumId }) => {
+const PhotoDetail = ({ title, imageUrl }) => {
   const {
+    thumbnailStyle,
     headerContentStyle,
-    
+    thumbnailContainerStyle,
     headerTextStyle,
     imageStyle
   } = styles;
@@ -16,6 +16,12 @@ const AlbumDetail = ({ title, albumId }) => {
   return (
     <Card>
       <CardSection>
+        <View style={thumbnailContainerStyle}>
+          <Image
+            style={thumbnailStyle}
+            source={{ uri: imageUrl }}
+          />
+        </View>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{title}</Text>
           
@@ -23,7 +29,14 @@ const AlbumDetail = ({ title, albumId }) => {
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => Actions.photoList({albumId:albumId})}>
+        <Image
+          style={imageStyle}
+          source={{ uri: imageUrl }}
+        />
+      </CardSection>
+
+      <CardSection>
+        <Button onPress={() => Linking.openURL(imageUrl)}>
           See Now!
         </Button>
       </CardSection>
@@ -56,4 +69,4 @@ const styles = {
   }
 };
 
-export default AlbumDetail;
+export default PhotoDetail;

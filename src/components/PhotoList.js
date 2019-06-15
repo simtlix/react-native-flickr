@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import axios from 'axios';
 import PhotoDetail from './PhotoDetail';
+import PhotoDetailComponent from './PhotoDetailComponent';
 
 class PhotoList extends Component {
   state = { photos: null };
@@ -13,7 +14,7 @@ class PhotoList extends Component {
 
   renderAlbums() {
     return this.state.photos.map(photo =>
-      <PhotoDetail key={photo.title} title={photo.title} imageUrl={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
+      <PhotoDetailComponent key={photo.title} title={photo.title} photo_id={photo.id} imageUrl={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
     );
   }
 

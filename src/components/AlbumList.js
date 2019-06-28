@@ -13,14 +13,11 @@ class AlbumList extends Component {
 
   renderAlbums() {
     return this.state.photoset.map(album =>
-      <AlbumDetail key={album.id} title={album.title._content}  albumId={album.id}  />
+      <AlbumDetail key={album.id} title={album.title._content}  albumId={album.id}/>
     );
   }
 
-  render() {
-    console.log(this.state);
-
-
+  render() { 
     if (!this.state.photoset) { 
 			return (
 					<Text>
@@ -28,7 +25,6 @@ class AlbumList extends Component {
 					</Text>
 				);
     }
-
     return (
       <View style={{ flex: 1 }}>
         <ScrollView>

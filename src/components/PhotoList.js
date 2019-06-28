@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import axios from 'axios';
-import PhotoDetail from './PhotoDetail';
 import PhotoDetailComponent from './PhotoDetailComponent';
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 class PhotoList extends Component {
   state = { photos: null };
@@ -19,25 +20,22 @@ class PhotoList extends Component {
   }
 
   render() {
-    console.log(this.state);
-
-
-    if (!this.state.photos) { 
-			return (
-                <View style={{ flex: 1 }}>
-					<Text>
-                        Loading...
+    if (!this.state.photos) {
+      return (
+        <View style={{ flex: 1 }}>
+          <Text>
+            Loading...
 					</Text>
-                </View>
-				);
+        </View>
+      );
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <ScrollView>
-                {this.renderAlbums()}
-            </ScrollView>
-        </View>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          {this.renderAlbums()}
+        </ScrollView>
+      </View>
     );
   }
 }

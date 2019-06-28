@@ -4,6 +4,7 @@ import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 import axios from 'axios';
+import Comment from './Comment'
 
 export default class PhotoDetailComponent extends React.Component {
 
@@ -13,14 +14,12 @@ export default class PhotoDetailComponent extends React.Component {
     this.title = props.title;
     this.imageUrl = props.imageUrl;
     this.photo_id = props.photo_id;
-
   }
 
   componentWillMount() {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=${this.photo_id}&format=json&nojsoncallback=1`)
       .then(response => this.loadComments(response))
-      .catch(error => console.log(error));
-        
+      .catch(error => console.log(error));        
   }
 
   loadComments(response) {
@@ -44,18 +43,13 @@ export default class PhotoDetailComponent extends React.Component {
   createComments() {
     return this.state.comments
       .map(comment =>
-        <CardSection>
-          <Text>{comment.authorname}</Text>
-          <Text>{comment._content}</Text>
-        </CardSection>
+       <Comment key={comment.id} username={comment.authorname} comment={comment._content}/>
       );
   }
 
   renderComments() {
     if (this.state.showComments) {
-
       if (this.state.comments) {
-
         return (
           <View style={{ flex: 1 }}>
             <ScrollView>
@@ -63,8 +57,6 @@ export default class PhotoDetailComponent extends React.Component {
             </ScrollView>
           </View>
         )
-
-
       } else {
         return (
           <CardSection >
@@ -72,8 +64,6 @@ export default class PhotoDetailComponent extends React.Component {
           </CardSection>
         );
       }
-
-
     } else {
       return null;
     }

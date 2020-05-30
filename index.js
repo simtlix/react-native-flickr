@@ -1,27 +1,35 @@
 /**
  * @format
  */
+import 'react-native-gesture-handler';
 import React from 'react';
 
 import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
-import {Router, Scene, Stack} from 'react-native-router-flux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
 
 // Create a component
 const App = () => (
-  <Router>
-    <Stack key="root">
-      <Scene
-        key="albumList"
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="albumList"
         component={AlbumList}
-        title="Albums"
-        initial={true}
+        options={{title: 'Albums'}}
       />
-      <Scene key="photoList" component={PhotoList} title="Photos" />
-    </Stack>
-  </Router>
+      <Stack.Screen
+        name="photoList"
+        component={PhotoList}
+        options={{title: 'Photos'}}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
 );
 
 AppRegistry.registerComponent(appName, () => App);

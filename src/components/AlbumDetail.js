@@ -3,9 +3,8 @@ import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
-import { Actions } from 'react-native-router-flux';
 
-const AlbumDetail = ({ title, albumId }) => {
+const AlbumDetail = ({ navigation, title, albumId }) => {
   const {
     headerContentStyle,
     
@@ -23,7 +22,8 @@ const AlbumDetail = ({ title, albumId }) => {
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => Actions.photoList({albumId:albumId})}>
+        <Button
+          onPress={() => navigation.navigate('photoList', {albumId: albumId})}>
           See Now!
         </Button>
       </CardSection>
